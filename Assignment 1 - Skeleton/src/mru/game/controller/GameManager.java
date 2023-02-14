@@ -37,10 +37,6 @@ public class GameManager {
 		display();		
 	}
 
-	private void display() {
-		
-	}
-
 	// Method to load the text file into an ArrayList
 	public static void loadFile() throws Exception {
 		// Create a FileReader and BufferedReader objects to read from the text file
@@ -117,6 +113,266 @@ public class GameManager {
 	
 	
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  UTSAV !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	
+	public void applyGame() throws Exception {
+		// Create a new player object with the player's name, balance, and number of wins
+		Player p = new Player(name, balance, playerWins);
 
+		// Print a welcome message that includes the player's name and balance
+		System.out.println("****************************************************************");
+		System.out.println("***   Welcome " + p.getName() + "   ---   Your balance is: " + p.getBalance() + "$        ***");
+		System.out.println("****************************************************************");
+		System.out.println("");
+    	Scanner sc = new Scanner(System.in);
+
+    	// Call the thirdMenu method from the AppMenu class to get the player's bet amount and choice
+    	String[] getAmt = AppMenu.thirdMenu();
+    	String choice = getAmt[0];
+    	if (!choice.equalsIgnoreCase("P") && !choice.equalsIgnoreCase("B") &&  !choice.equalsIgnoreCase("T") ) {
+    		System.out.println("");
+    		System.out.println("\t  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    		System.out.println("\t  $       Invalid input       $");
+    		System.out.println("\t  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    		System.out.println("");
+			display();
+		}
+    	int betAmt = Integer.parseInt(getAmt[1]);
+
+    	// Check if the bet amount is valid
+    	if (betAmt <= 0 || betAmt > balance) {
+    	    System.out.println("Not enough money to play the game. ");
+    	    display();
+    	}
+
+    	// Call the method to play the Punto Banco game and store the result
+    	boolean win = PuntoBancoGame.method(PuntoBancoGame.Getpoints());
+
+    	// Check the game result and update the player's balance and number of wins accordingly
+    	if (win == true && choice.equalsIgnoreCase("P")) {
+    	    count = count + 1;
+    	    balance = balance + betAmt;
+    	    playerWins++;
+    	    PuntoBancoGame.PrintWin(); 
+
+    	} else if (win == true && !choice.equalsIgnoreCase("P")) {
+    	    balance = balance - betAmt;
+    	    PuntoBancoGame.Printloose();
+    	} else if (win == false && choice.equalsIgnoreCase("B") && PuntoBancoGame.getTie() == false) {
+    	    balance = balance + betAmt;
+    	    playerWins++;
+    	    PuntoBancoGame.PrintWin(); 
+
+    	} else if (win == false && !choice.equalsIgnoreCase("B") && PuntoBancoGame.getTie() == false) {
+    	    balance = balance - betAmt;
+    	    PuntoBancoGame.Printloose();
+    	}
+
+    	else if (win == false && choice.equalsIgnoreCase("T") && PuntoBancoGame.getTie() == true) {
+    	    balance = balance + (betAmt * 5);
+    	    playerWins++;
+    	    PuntoBancoGame.PrintWin(); 
+    	     
+    	} else if (win == false && !choice.equalsIgnoreCase("T") && PuntoBancoGame.getTie() == true) {
+    	    balance = balance - (betAmt / 5);
+    	    PuntoBancoGame.Printloose();
+    	}
+   
+    	// Create a new Player object with the updated balance and number of wins
+    	p = new Player(name, balance, playerWins);
+
+    	// Add the new Player object to the ArrayList
+    	arrList.add(p);
+
+    	// Save the ArrayList to a file
+    	SaveFile();
+	}
+	public void applyGame2() throws Exception {           // same method as above but intented for returning players
+		Player plt = nameCheck(name);
+		balance = plt.getBalance();
+		playerWins = plt.getnWins();
+		System.out.println("********************************************************************");
+    	System.out.println("***   Welcome Back " + plt.getName() + "   ---   Your balance is: " + plt.getBalance() + "$        ***");
+    	System.out.println("********************************************************************");
+		Scanner sc = new Scanner(System.in);
+		String[] getAmt = AppMenu.thirdMenu();
+		String choice = getAmt[0];
+		if (!choice.equalsIgnoreCase("P") && !choice.equalsIgnoreCase("B") &&  !choice.equalsIgnoreCase("T") ) {
+			System.out.println("");
+    		System.out.println("\t  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    		System.out.println("\t  $       Invalid input       $");
+    		System.out.println("\t  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    		System.out.println("");
+			display();
+		}
+		int betAmt = Integer.parseInt(getAmt[1]);
+	
+
+		if (betAmt <= 0 || betAmt > balance) {
+			System.out.println("Not enough money to play the game.");
+			display();
+		}
+
+		boolean win = PuntoBancoGame.method(PuntoBancoGame.Getpoints());
+		if (win == true && choice.equalsIgnoreCase("P")) {
+			count = count + 1;
+			balance = balance + betAmt;
+			playerWins++;
+			PuntoBancoGame.PrintWin(); 
+
+		} else if (win == true && !choice.equalsIgnoreCase("P")) {
+
+			balance = balance - betAmt;
+			PuntoBancoGame.Printloose();
+		} else if (win == false && choice.equalsIgnoreCase("B") && PuntoBancoGame.getTie() == false) {
+
+			balance = balance + betAmt;
+			playerWins++;
+			PuntoBancoGame.PrintWin(); 
+
+		} else if (win == false && !choice.equalsIgnoreCase("B") && PuntoBancoGame.getTie() == false) {
+			balance = balance - betAmt;
+			PuntoBancoGame.Printloose();
+		}
+
+		else if (win == false && choice.equalsIgnoreCase("T") && PuntoBancoGame.getTie() == true) {
+			balance = balance + (betAmt * 5);
+			playerWins++;
+			PuntoBancoGame.PrintWin(); 
+		} else if (win == false && !choice.equalsIgnoreCase("T") && PuntoBancoGame.getTie() == true) {
+			balance = balance - (betAmt / 5);
+			PuntoBancoGame.Printloose();
+		} else {
+			System.out.println("Invalid input!");
+			display();
+		}
+		plt.setName(name);
+		plt.setBalance(balance);   // using set methods to change balances on existing accounts
+		plt.setWins(playerWins);
+		SaveFile();
+
+	}
+
+	public void display() throws Exception {
+	    
+	    // Prompt user with the first menu
+	    String i1 = AppMenu.firstMenu();
+	    String userInput = "Y";
+	    Scanner sc = new Scanner(System.in);
+	    
+	    // User chooses to play the game
+	    if (i1.equalsIgnoreCase("P")) {
+	        
+	        // Continue playing game until user chooses to stop
+	        while (userInput.equalsIgnoreCase("y")) {
+	            
+	            // Check if player database exists
+	            if (booleanNamecheck() == false) {
+	                // Play the game for new player
+	                applyGame();
+	            } else {
+	                // Play the game for existing player
+	                applyGame2();
+	            }
+	            
+	            // Ask user if they want to play again
+	            System.out.println("Do you want to play again?");
+	            userInput = sc.nextLine();
+	            
+	            // If user chooses to stop playing, display the first menu again
+	            if (!userInput.equalsIgnoreCase("y")) {
+	                display();
+	            }
+	        }
+	        
+	    // User chooses to view statistics
+	    } else if (i1.equalsIgnoreCase("S")) {
+	        
+	        // Prompt user with the second menu
+	        String i2 = AppMenu.secondMenu();
+	        System.out.println("");
+	        
+	        if (i2.equalsIgnoreCase("T")) {
+	            // Display top players
+	            System.out.println("    - TOP PLAYERS -");
+	            sc = new Scanner(System.in);
+	            System.out.println("+==========+==========+");
+	            System.out.printf("| %-8s | %-8s |\n", topPlayer().get(0).getName(), topPlayer().get(0).getnWins());
+	            System.out.println("-----------------------");
+	            System.out.printf("| %-8s | %-8s |\n", topPlayer().get(1).getName(), topPlayer().get(1).getnWins());
+	            System.out.println("+==========+==========+");
+	            System.out.println();
+	            System.out.println("Press Enter to continue");
+	            
+	            // If user presses enter, display the first menu again
+	            String myObj = sc.nextLine();
+	            if(myObj.equals("")) {
+	                display();
+	            } else {
+	                // Otherwise, exit the game
+	                System.out.println("Thanks for playing!");
+	                System.exit(0);
+	            }
+	            
+	        } else if (i2.equalsIgnoreCase("N")) {
+	            // Search for player by name
+	            System.out.println("Enter name to search.");
+	            sc = new Scanner(System.in);
+	            String input = sc.nextLine();
+	            try {
+	            System.out.println("**********************************");
+	            System.out.println ("*** "+nameCheck(input).getName() + " --- "+ "No of wins " + nameCheck(input).getnWins()+ " ***");
+	            System.out.println("**********************************");
+	            
+	            System.out.println("Press Enter to continue.");
+	           String myObj = sc.nextLine();
+	            // If user presses enter, display the first menu again
+	            if(myObj.equals("")) {
+	                display();
+	            } else {
+	                // Otherwise, exit the game
+	                System.out.println("Thanks for playing!");
+	                System.exit(0);
+	            }
+	            
+	        }
+	            catch (Exception e){
+	            	System.out.println("Name doesnt exist!");
+	            	  System.out.println("Press Enter to continue.");
+	   	           String myObj = sc.nextLine();
+	            	 if(myObj.equals("")) {
+	 	                display();
+	 	            } else {
+	 	                // Otherwise, exit the game
+	 	                System.out.println("Thanks for playing!");
+	 	                System.exit(0);
+	 	            }
+	            }
+	        }
+	            else if (i2.equalsIgnoreCase("B")) {
+	            // Display the first menu again
+	            display();
+	            
+	        }
+	        
+	    // User chooses to exit the game
+	    } else if (i1.equalsIgnoreCase("E")) {
+	        
+	        // Save player data to file and exit the game
+	        System.out.println("Saving............");
+	        System.out.print("Thank you for playing!");
+	        SaveFile();
+	        System.exit(0);
+	        
+	    } else {
+	        // Display an error message and prompt the user with the first menu again
+	        System.out.println("Invalid input entered, please try again.");
+	        display();
+	    }
+	}
+
+	
+
+}
 
 

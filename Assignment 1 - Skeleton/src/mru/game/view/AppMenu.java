@@ -22,7 +22,6 @@ public class AppMenu {
 		System.out.printf("%10s\n", "(E) Exit");
 		System.out.println("Enter a choice: ");
         String input1 = sc.nextLine();
-        sc.close();
         return input1;
     }
     public static String secondMenu(){
@@ -33,7 +32,7 @@ public class AppMenu {
         System.out.printf("%10s\n", "(B) Back to the main menu");
         System.out.println("Enter a choice : ");
         String input2 = sc.nextLine();
-        sc.close();
+       
         return input2;
     }
     public static String[] thirdMenu(){
@@ -47,14 +46,14 @@ public class AppMenu {
         System.out.println("How much do you want to bet this round?");
         String betAmtS = sc.nextLine();
         String [] x = {input3,betAmtS};
-        sc.close();
+       
         return x;
 }
     public static String getName(){
     	Scanner sc = new Scanner(System.in);
     	System.out.print("Enter your name: ");    // prompt users name
 		String name = sc.nextLine();
-		sc.close(); 
+		
 		return name;
     	
     }
