@@ -13,6 +13,13 @@ public class AppMenu {
 	
 	
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Declan !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	
+	/**
+	 * Displays the main menu and prompts the user for their choice
+	 *
+	 * @return The user's choice as a String
+	 */
  
 	public static String firstMenu() {
         System.out.println("Select One of the Options: ");
@@ -24,6 +31,14 @@ public class AppMenu {
         String input1 = sc.nextLine();
         return input1;
     }
+	
+	/**
+	 * Displays the submenu and prompts the user for their choice
+	 *
+	 * @return The user's choice as a String
+	 */
+	
+	
     public static String secondMenu(){
     	Scanner sc = new Scanner(System.in);
         System.out.println("Select One of the Options: ");
@@ -35,6 +50,13 @@ public class AppMenu {
        
         return input2;
     }
+    
+    /**
+     * Displays the game result menu and prompts the user for their choice and bet amount
+     *
+     * @return The user's choice and bet amount as a String array
+     */
+    
     public static String[] thirdMenu(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Select One of the Options : ");

@@ -14,30 +14,40 @@ import mru.game.view.AppMenu;
 
 public class GameManager {
 
-	/*
-	 * In this class toy'll need these methods: A constructor A method to load the
-	 * text file into an arraylist (if it exists, so you check if the txt file
-	 * exists first) A save method to store the arraylist into the the txt file A
-	 * method to search for a player based on their choice A method to find the top
-	 * players Depending on your designing technique you may need and you can add
-	 * more methods here
+	/**
+	 * The GameManager class manages the game's data, including loading and saving the
+	 * player data to a text file, searching for a player based on their choice,
+	 * and finding the top players.
 	 */
-
-	// Initialize instance variables
+	
+	
 	private int playerWins = 0;
 	private static String name;
 	private int balance = 100;
 	private int count = 0;
 	static File f = new File("res/CasinoInfo.txt");
 	private static ArrayList<Player> arrList = new ArrayList<Player>();
+	
+	
+	 /**
+     * Constructor for the GameManager class. Calls the loadFile method and the
+     * display method when an instance is created.
+     * 
+     * @throws Exception if there is an error loading the file
+     */
+	
 
 	public GameManager() throws Exception {
-		// Call the load file method and the display method when an instance is created
+												// Call the load file method and the display method when an instance is created
 		loadFile();
 		display();		
 	}
-
-	// Method to load the text file into an ArrayList
+	 /**
+     * Loads the text file into an ArrayList.
+     * 
+     * @throws Exception if there is an error loading the file
+     */
+	
 	public static void loadFile() throws Exception {
 		// Create a FileReader and BufferedReader objects to read from the text file
 		FileReader fr = new FileReader(f);
@@ -54,8 +64,17 @@ public class GameManager {
 			fr.close();
 		}
 	}
+	
+	
+	/**
+     * Saves the ArrayList to the text file.
+     * 
+     * @throws Exception if there is an error saving the file
+     */
+	
+	
+	
 
-	// Method to save the ArrayList to the text file
 	public static void SaveFile() throws Exception {
 		// Create a FileWriter and PrintWriter objects to write to the text file
 		FileWriter fw = new FileWriter("res/CasinoInfo.txt");
@@ -67,7 +86,13 @@ public class GameManager {
 		fw.close();
 	}
 
-	// Method to check if the entered name is in the ArrayList
+	
+	 /**
+     * Checks if the entered name is in the ArrayList.
+     * 
+     * @return true if the name is found in the ArrayList, false otherwise
+     */
+
 	public static boolean booleanNamecheck() {
 		// Get the name from the AppMenu class
 		name = AppMenu.getName();
@@ -81,7 +106,14 @@ public class GameManager {
 		return status;
 	}
 
-	// Method to return the player object associated with the name
+	
+	/**
+     * Returns the player object associated with the given name.
+     * 
+     * @param x the name of the player to search for
+     * @return the Player object associated with the name, or null if not found
+     */
+
 	public static Player nameCheck(String x) {
 		for (Player p : arrList) {
 			// If the name is found, return the Player object
@@ -92,7 +124,11 @@ public class GameManager {
 		return null;
 	}
 
-	// Method to find the top 2 players
+	/**
+     * Finds the top 2 players in the ArrayList.
+     * 
+     * @return an ArrayList containing the top 2 players
+     */
 
 	public static ArrayList<Player> topPlayer() {  // method to search for the top 2 players 
 	    for(int i = 0; i < arrList.size()-1; i++) { // loop through the array list from 0 to the second-to-last index
@@ -113,6 +149,12 @@ public class GameManager {
 	
 	
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  UTSAV !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	  /**
+     * Applies the game to the player.
+     * 
+     * @throws Exception if there is an error during the game
+     */
 	
 	
 	public void applyGame() throws Exception {
@@ -187,6 +229,16 @@ public class GameManager {
     	// Save the ArrayList to a file
     	SaveFile();
 	}
+	
+	
+	  /**
+     * Applies the game to the player.
+     * 
+     * @throws Exception if there is an error during the game
+     */
+	
+	
+	
 	public void applyGame2() throws Exception {           // same method as above but intented for returning players
 		Player plt = nameCheck(name);
 		balance = plt.getBalance();
@@ -252,6 +304,13 @@ public class GameManager {
 		SaveFile();
 
 	}
+	
+	/**
+
+	Displays the game menu and handles user input.
+
+	@throws Exception if an error occurs while displaying the menu or handling user input
+	*/
 
 	public void display() throws Exception {
 	    

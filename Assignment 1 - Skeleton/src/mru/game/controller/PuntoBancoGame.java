@@ -1,5 +1,5 @@
 package mru.game.controller;
-// game running now make text file and co-ordinate and save data to text file.
+
 public class PuntoBancoGame {
 	
 	/**
@@ -9,15 +9,7 @@ public class PuntoBancoGame {
 	 */
 	
 	
-	
-	
-	
-	
-	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Utsav !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	
-	
-	
+	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Utsav !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 private static boolean gameWon = false;
 private static boolean gameTie = false;
 private static Card playerH = null;
@@ -31,7 +23,13 @@ private static Card compH3= null;
 //	return Balance;
 //}
 	public static CardDeck dec = new CardDeck();
-public static int[] Getpoints() {
+	
+	 /**
+	   * Returns an array containing the total points of the player and the dealer.
+	   * 
+	   * @return the total points of the player and the dealer
+	   */
+	public static int[] Getpoints() {
 	if (dec.getDeck().size() <= 4) {
 		dec = new CardDeck();
 	} // if and else conditions according to the assignment sheet
@@ -67,14 +65,18 @@ if (totalP ==18) {
 	int[] totalarr = {totalC, totalP};
 	return totalarr;
 	}
-public static boolean method( int[] x) {
+	
+	 /**
+	   * Returns an array containing the total points of the player and the dealer.
+	   * 
+	   * @return the total points of the player and the dealer
+	   */
+	
+	public static boolean method( int[] x) {
 	int totalC = x[0];
 	int totalP = x[1];
 	boolean cardDraw ;
-//	Card playerH3 = dec.getDeck().remove(0);
-//	int playerP3 = playerH3.getRank();
-//	Card compH3 = dec.getDeck().remove(0);
-//	int compP3 = compH3.getRank();
+
 	int compP3 = 0;
 	
 	int playerP3 = 0;
@@ -218,10 +220,32 @@ else {
 		return gameWon= false;
 	}
 }
+
+
+
+
 }
+	
+	
 public static boolean getTie() {
 	return gameTie; // returning if game is tied or not
 }
+
+
+/**
+ * Displays the cards and the total points for the player and the dealer.
+ * 
+ * @param playerH the first card of the player
+ * @param compH the first card of the dealer
+ * @param playerH1 the second card of the player
+ * @param compH1 the second card of the dealer
+ * @param playerH3 the third card of the player
+ * @param compH3 the third card of the dealer
+ * @param totalP the total points of the player
+ * @param totalC the total points of the dealer
+ */
+
+
 public static void Displayformat(Card a, Card b, Card c, Card d, Card e, Card f, int x, int y) {
 	System.out.println("");
 	System.out.println("+======================+======================+");

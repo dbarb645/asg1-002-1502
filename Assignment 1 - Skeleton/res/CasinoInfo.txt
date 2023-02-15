@@ -1,4 +1,6 @@
+khosro,1618,18
+eli,0,18
 Ali,75,10
-Khosro,1639,18
-Eli,1000,18
+jimmy,320,2
+bobby,200,1
 Utsav,96,0
